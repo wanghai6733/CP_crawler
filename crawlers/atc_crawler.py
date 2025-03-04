@@ -25,7 +25,7 @@ def get_upcoming_contests():
 
 
 
-    time.sleep(2)
+    # time.sleep(2)
     # 获取最新比赛标签
     competitions = driver.find_elements(By.XPATH,'//div[@id="contest-table-upcoming"]//tbody/tr')
     
