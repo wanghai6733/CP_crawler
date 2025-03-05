@@ -11,7 +11,7 @@ def get_upcoming_contests():
     driver = webdriver.Edge()
     # driver = webdriver.Edge(options=options)
     driver.implicitly_wait(2)
-    driver.set_page_load_timeout(5)
+    driver.set_page_load_timeout(10)
 
     
     # 打开目标网站
@@ -25,7 +25,7 @@ def get_upcoming_contests():
 
 
 
-    # time.sleep(2)
+    time.sleep(2)
 
     datalist = []
     try:
@@ -34,7 +34,9 @@ def get_upcoming_contests():
             "比赛名称":competition.find_element(By.XPATH,'./div[@class="card-title text-white"]').text,
             "开始时间":competition.find_element(By.XPATH,'./div[@class="time"]').text,
             "比赛时长":competition.find_element(By.XPATH,'./div[@class="intro hidden-xs"]').text,
-            "距离开始":competition.find_element(By.XPATH,'.//div[@class="card-footer"]').text
+            "距离开始":competition.find_element(By.XPATH,'.//div[@class="card-footer"]').text,
+            "OJ":"leetcode",
+            "网址":competition.find_element(By.XPATH,"..").get_attribute("href")
         }
         # print(data)
         datalist.append(data)
@@ -46,7 +48,9 @@ def get_upcoming_contests():
         data = {
             "比赛名称":competition.find_element(By.XPATH,'./div[@class="title"]').text,
             "开始时间":competition.find_element(By.XPATH,'.//div[@class="contest-time"]/span[1]').text + competition.find_element(By.XPATH,'.//div[@class="contest-time"]/span[2]').text,
-            "距离开始":competition.find_element(By.XPATH,'./div[@class="card-footer"]/span').text
+            "距离开始":competition.find_element(By.XPATH,'./div[@class="card-footer"]/span').text,
+            "OJ":"leetcode",
+            "网址":competition.find_element(By.XPATH,"../..").get_attribute("href")
         }
         # print(data)
         datalist.append(data)

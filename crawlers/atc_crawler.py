@@ -11,7 +11,7 @@ def get_upcoming_contests():
     driver = webdriver.Edge()
     # driver = webdriver.Edge(options=options)
     driver.implicitly_wait(2)
-    driver.set_page_load_timeout(5)
+    driver.set_page_load_timeout(10)
 
     
     # 打开目标网站
@@ -25,7 +25,7 @@ def get_upcoming_contests():
 
 
 
-    # time.sleep(2)
+    time.sleep(2)
     # 获取最新比赛标签
     competitions = driver.find_elements(By.XPATH,'//div[@id="contest-table-upcoming"]//tbody/tr')
     
@@ -35,7 +35,9 @@ def get_upcoming_contests():
         # print(competition.find_element(By.XPATH,"./td[1]").text)
         data = {
             "比赛名称":competition.find_element(By.XPATH,"./td/small/a[contains(@href, 'contests')]").text,
-            "开始时间":competition.find_element(By.XPATH,"./td/small/a/time").text
+            "开始时间":competition.find_element(By.XPATH,"./td/small/a/time").text,
+            "OJ":"atcoder",
+            "网址":competition.find_element(By.XPATH,"./td/small/a[contains(@href, 'contests')]").get_attribute("href")
         }
         # print(data)
         datalist.append(data)
